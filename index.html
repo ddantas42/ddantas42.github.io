@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kill Team Point Counter</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="container" id="left-container">
+		<h1>Kill Team Point Counter</h1>
+		<div class="buttons" id="add-buttons">
+			<button onclick="addPoints('crit')">Add Crit Op</button>
+			<button onclick="addPoints('kill')">Add Kill Op</button>
+			<button onclick="addPoints('tac')">Add Tac Op</button>
+		</div>
+
+		<div class="buttons" id ="remove-buttons">
+			<button onclick="removePoints('crit')">Remove Crit Op</button>
+			<button onclick="removePoints('kill')">Remove Kill Op</button>
+			<button onclick="removePoints('tac')">Remove Tac Op</button>
+		</div>
+
+		<div class="scoreboard">
+			<div class="op-container">
+				<div class="op-box" id="crit-box">Crit Op: 0</div>
+				<div class="op-box" id="tac-box">Tac Op: 0</div>
+				<div class="op-box" id="kill-box">Kill Op: 0</div>
+			</div>
+			<div class="primary-container">
+				<div class="op-box" id="crit-primary-box">Crit Op (Primary): 0</div>
+				<div class="op-box" id="tac-primary-box">Tac Op (Primary): 0</div>
+				<div class="op-box" id="kill-primary-box">Kill Op (Primary): 0</div>	
+			</div>
+			<div class="final-box" id="enemy-total">Opponent Max Total: 0</div>
+		</div>
+		<h2>Your Score</h2>
+		<div class="your-score">
+			<input type="checkbox" id="crit-primary-check" onclick="updateMyTotal('crit')"> Crit Primary
+			<input type="checkbox" id="kill-primary-check" onclick="updateMyTotal('kill')"> Kill Primary
+			<input type="checkbox" id="tac-primary-check" onclick="updateMyTotal('tac')"> Tac Primary
+		</div>
+		<div class="final-box" id="my-total">Your Total: 0</div>
+	</div>
+
+	<div class="container" id="right-container">
+		<h1>Opponent's Score</h1>
+		<div class="opponent-score">
+			<input type="checkbox" id="crit-opponent-check" onclick="updateEnemyTotal('crit')"> Crit Opponent
+			<input type="checkbox" id="kill-opponent-check" onclick="updateEnemyTotal('kill')"> Kill Opponent
+			<input type="checkbox" id="tac-opponent-check" onclick="updateEnemyTotal('tac')"> Tac Opponent
+		</div>
+		<div class="final-box" id="enemy-total">Opponent Total: 0</div>
+	<script src="scripts.js"></script>
+	
+</body>
+</html>
