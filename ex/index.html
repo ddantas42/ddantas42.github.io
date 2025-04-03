@@ -8,50 +8,69 @@
 </head>
 <body>
 	<div class="container" id="left-container">
-		<h1>Kill Team Point Counter</h1>
+		<h1>Opponent</h1>
 		<div class="buttons" id="add-buttons">
-			<button onclick="addPoints('crit')">Add Crit Op</button>
-			<button onclick="addPoints('kill')">Add Kill Op</button>
-			<button onclick="addPoints('tac')">Add Tac Op</button>
+			<button onclick="addPoints('crit_opponent')">Add Crit Op</button>
+			<button onclick="addPoints('kill_opponent')">Add Kill Op</button>
+			<button onclick="addPoints('tac_opponent')">Add Tac Op</button>
 		</div>
 
 		<div class="buttons" id ="remove-buttons">
-			<button onclick="removePoints('crit')">Remove Crit Op</button>
-			<button onclick="removePoints('kill')">Remove Kill Op</button>
-			<button onclick="removePoints('tac')">Remove Tac Op</button>
+			<button onclick="removePoints('crit_opponent')">Remove Crit Op</button>
+			<button onclick="removePoints('kill_opponent')">Remove Kill Op</button>
+			<button onclick="removePoints('tac_opponent')">Remove Tac Op</button>
 		</div>
 
 		<div class="scoreboard">
 			<div class="op-container">
-				<div class="op-box" id="crit-box">Crit Op: 0</div>
-				<div class="op-box" id="tac-box">Tac Op: 0</div>
-				<div class="op-box" id="kill-box">Kill Op: 0</div>
+				<div class="op-box" id="crit-box-opponent">Crit Op: 0</div>
+				<div class="op-box" id="tac-box-opponent">Tac Op: 0</div>
+				<div class="op-box" id="kill-box-opponent">Kill Op: 0</div>
 			</div>
 			<div class="primary-container">
-				<div class="op-box" id="crit-primary-box">Crit Op (Primary): 0</div>
-				<div class="op-box" id="tac-primary-box">Tac Op (Primary): 0</div>
-				<div class="op-box" id="kill-primary-box">Kill Op (Primary): 0</div>	
+				<div class="op-box" id="crit-primary-box-opponent">Crit Op (Primary): 0</div>
+				<div class="op-box" id="tac-primary-box-opponent">Tac Op (Primary): 0</div>
+				<div class="op-box" id="kill-primary-box-opponent">Kill Op (Primary): 0</div>	
 			</div>
-			<div class="final-box" id="enemy-total">Opponent Max Total: 0</div>
+			<div class="final-box" id="opponent-total">Total: 0</div>
 		</div>
-		<h2>Your Score</h2>
-		<div class="your-score">
-			<input type="checkbox" id="crit-primary-check" onclick="updateMyTotal('crit')"> Crit Primary
-			<input type="checkbox" id="kill-primary-check" onclick="updateMyTotal('kill')"> Kill Primary
-			<input type="checkbox" id="tac-primary-check" onclick="updateMyTotal('tac')"> Tac Primary
-		</div>
-		<div class="final-box" id="my-total">Your Total: 0</div>
 	</div>
-
-	<div class="container" id="right-container">
-		<h1>Opponent's Score</h1>
-		<div class="opponent-score">
-			<input type="checkbox" id="crit-opponent-check" onclick="updateEnemyTotal('crit')"> Crit Opponent
-			<input type="checkbox" id="kill-opponent-check" onclick="updateEnemyTotal('kill')"> Kill Opponent
-			<input type="checkbox" id="tac-opponent-check" onclick="updateEnemyTotal('tac')"> Tac Opponent
-		</div>
-		<div class="final-box" id="enemy-total">Opponent Total: 0</div>
-	<script src="scripts.js"></script>
 	
-</body>
-</html>
+	<div class="container" id="right-container">
+		<h1>Player</h1>
+		<div class="buttons" id="add-buttons">
+			<button onclick="addPoints('crit_player')">Add Crit Op</button>
+			<button onclick="addPoints('kill_player')">Add Kill Op</button>
+			<button onclick="addPoints('tac_player')">Add Tac Op</button>
+		</div>
+		
+		<div class="buttons" id ="remove-buttons">
+			<button onclick="removePoints('crit_player')">Remove Crit Op</button>
+			<button onclick="removePoints('kill_player')">Remove Kill Op</button>
+			<button onclick="removePoints('tac_player')">Remove Tac Op</button>
+		</div>
+		
+		<div class="scoreboard">
+			<div class="op-container">
+				<div class="op-box" id="crit-box-player">Crit Op: 0</div>
+				<div class="op-box" id="tac-box-player">Tac Op: 0</div>
+				<div class="op-box" id="kill-box-player">Kill Op: 0</div>
+			</div>
+			<div class="primary-container">
+				<div class="op-box" id="crit-primary-box-player">Crit Op (Primary): 0</div>
+				<div class="op-box" id="tac-primary-box-player">Tac Op (Primary): 0</div>
+				<div class="op-box" id="kill-primary-box-player">Kill Op (Primary): 0</div>	
+			</div>
+
+			<div class="your-score">
+				<input type="checkbox" id="crit-primary-check" onclick="updateUI()"> Crit Primary
+				<input type="checkbox" id="kill-primary-check" onclick="updateUI()"> Kill Primary
+				<input type="checkbox" id="tac-primary-check" onclick="updateUI()"> Tac Primary
+			</div>
+
+			<div class="final-box" id="player-total">Total: 0</div>
+		</div>
+		<script src="script.js"></script>
+		
+	</body>
+	</html>
