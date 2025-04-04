@@ -67,22 +67,18 @@ function updateUI()
 function updateBackgrounds(playerTotal, opponentTotal) {
 	const maxPoints = 21;
 
-	// Get progress % (clamped between 0 and 1)
 	const playerProgress = Math.min(playerTotal / maxPoints, 1);
 	const opponentProgress = Math.min(opponentTotal / maxPoints, 1);
 
-	// Determine who's ahead
 	const playerAhead = playerTotal > opponentTotal;
 	const opponentAhead = opponentTotal > playerTotal;
 
-	// Calculate color intensity based on closeness to 21
 	const red = (intensity) => `rgb(${Math.floor(255 * intensity)}, 0, 0)`;
 	const blue = (intensity) => `rgb(0, 0, ${Math.floor(255 * intensity)})`;
 
 	const playerColor = playerAhead ? red(playerProgress) : blue(playerProgress);
 	const opponentColor = opponentAhead ? red(opponentProgress) : blue(opponentProgress);
 
-	// Tie color
 	const tieColor = 'black';
 
 	document.getElementById('player-total').style.backgroundColor =
