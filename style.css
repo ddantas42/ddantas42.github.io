@@ -5,7 +5,7 @@ body {
 	color: white;
 }
 .container {
-	max-width: 40%;
+	max-width: 25%;
 	margin: 20px auto;
 	padding: 20px;
 	background-color: #3b3f47;
@@ -46,4 +46,8 @@ button:hover { filter: brightness(1.2); }
 	font-size: 22px;
 	font-weight: bold;
 	background-color: #ff9800;
+}
+
+.scoreboard {
+	display: flex;
 }

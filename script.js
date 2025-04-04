@@ -10,8 +10,13 @@ let myPoints = {
 
 function addPoints(type)
 {
-	if (points[type] < 6)
+	limit = 6;
+	if (type == 'kill_opponent' || type == 'kill_player')
+		limit = 5
+
+	if (points[type] < limit)
 	    points[type] += 1;
+
     updateUI();
 }
 
@@ -50,25 +55,39 @@ function updateUI()
     document.getElementById('kill-primary-box-player').innerText = `Kill Op (Primary): ${primaryOps.kill_player}`;
     document.getElementById('tac-primary-box-player').innerText = `Tac Op (Primary): ${primaryOps.tac_player}`;
     
-	total_update('opponent-total', points.crit_opponent, points.kill_opponent, points.tac_opponent);
-	total_update('player-total', points.crit_player, points.kill_player, points.tac_player);
+	opponent_total_update('opponent-total', points.crit_opponent, points.kill_opponent, points.tac_opponent);
+	player_total_update('player-total', points.crit_player, points.kill_player, points.tac_player);
 }
 
-function total_update(elem, crit, kill, tac)
+function player_total_update(elem, crit, kill, tac)
 {
     let highestPrimary = Math.max(crit, kill, tac);
 	highestPrimary = Math.ceil(highestPrimary / 2);
-	if (elem == 'player-total')
-	{
-		if (document.getElementById('crit-primary-check').checked)
-			highestPrimary = Math.ceil(crit / 2);
-		else if (document.getElementById('kill-primary-check').checked)
-			highestPrimary = Math.ceil(kill / 2);
-		else if (document.getElementById('tac-primary-check').checked)
-			highestPrimary = Math.ceil(tac / 2);
-		else
-			highestPrimary = 0;
-	}
-    let total = crit + kill + tac + highestPrimary;
+
+	if (document.getElementById('crit-primary-check').checked)
+		highestPrimary = Math.ceil(crit / 2);
+	else if (document.getElementById('kill-primary-check').checked)
+		highestPrimary = Math.ceil(kill / 2);
+	else if (document.getElementById('tac-primary-check').checked)
+		highestPrimary = Math.ceil(tac / 2);
+	else
+		highestPrimary = 0;
+
+	let total = crit + kill + tac + highestPrimary;
+
+	if (kill > points['kill_opponent'])
+		total += 1;
+	
     document.getElementById(elem).innerText = `Max Total: ${total}`;
+}
+
+function opponent_total_update(elem, crit, kill, tac)
+{
+	let highestPrimary = Math.max(crit, kill, tac);
+	highestPrimary = Math.ceil(highestPrimary / 2);
+
+	let total = crit + kill + tac + highestPrimary;
+	if (kill > points['kill_player'])
+		total += 1;
+	document.getElementById(elem).innerText = `Max Total: ${total}`;
 }
