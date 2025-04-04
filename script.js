@@ -55,9 +55,43 @@ function updateUI()
     document.getElementById('kill-primary-box-player').innerText = `Kill Op (Primary): ${primaryOps.kill_player}`;
     document.getElementById('tac-primary-box-player').innerText = `Tac Op (Primary): ${primaryOps.tac_player}`;
     
-	opponent_total_update('opponent-total', points.crit_opponent, points.kill_opponent, points.tac_opponent);
-	player_total_update('player-total', points.crit_player, points.kill_player, points.tac_player);
+	opponnent_total = opponent_total_update('opponent-total', points.crit_opponent, points.kill_opponent, points.tac_opponent);
+    document.getElementById('opponent-total').innerText = `Total: ${opponnent_total}`;
+
+	player_total = player_total_update('player-total', points.crit_player, points.kill_player, points.tac_player);
+	document.getElementById('player-total').innerText = `Total: ${player_total}`;
+
+	updateBackgrounds(player_total, opponnent_total);
 }
+
+function updateBackgrounds(playerTotal, opponentTotal) {
+	const maxPoints = 21;
+
+	// Get progress % (clamped between 0 and 1)
+	const playerProgress = Math.min(playerTotal / maxPoints, 1);
+	const opponentProgress = Math.min(opponentTotal / maxPoints, 1);
+
+	// Determine who's ahead
+	const playerAhead = playerTotal > opponentTotal;
+	const opponentAhead = opponentTotal > playerTotal;
+
+	// Calculate color intensity based on closeness to 21
+	const red = (intensity) => `rgb(${Math.floor(255 * intensity)}, 0, 0)`;
+	const blue = (intensity) => `rgb(0, 0, ${Math.floor(255 * intensity)})`;
+
+	const playerColor = playerAhead ? red(playerProgress) : blue(playerProgress);
+	const opponentColor = opponentAhead ? red(opponentProgress) : blue(opponentProgress);
+
+	// Tie color
+	const tieColor = 'black';
+
+	document.getElementById('player-total').style.backgroundColor =
+		playerTotal === opponentTotal ? tieColor : playerColor;
+
+	document.getElementById('opponent-total').style.backgroundColor =
+		playerTotal === opponentTotal ? tieColor : opponentColor;
+}
+
 
 function player_total_update(elem, crit, kill, tac)
 {
@@ -78,7 +112,7 @@ function player_total_update(elem, crit, kill, tac)
 	if (kill > points['kill_opponent'])
 		total += 1;
 
-    document.getElementById(elem).innerText = `Total: ${total}`;
+	return total
 }
 
 function opponent_total_update(elem, crit, kill, tac)
@@ -89,5 +123,5 @@ function opponent_total_update(elem, crit, kill, tac)
 	let total = crit + kill + tac + highestPrimary;
 	if (kill > points['kill_player'])
 		total += 1;
-	document.getElementById(elem).innerText = `Total: ${total}`;
+	return total
 }
