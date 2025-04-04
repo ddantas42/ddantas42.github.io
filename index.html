@@ -7,21 +7,22 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="container" id="left-container">
-		<h1>Opponent</h1>
-		<div class="buttons" id="add-buttons">
-			<button onclick="addPoints('crit_opponent')">Add Crit Op</button>
-			<button onclick="addPoints('kill_opponent')">Add Kill Op</button>
-			<button onclick="addPoints('tac_opponent')">Add Tac Op</button>
-		</div>
-
-		<div class="buttons" id ="remove-buttons">
-			<button onclick="removePoints('crit_opponent')">Remove Crit Op</button>
-			<button onclick="removePoints('kill_opponent')">Remove Kill Op</button>
-			<button onclick="removePoints('tac_opponent')">Remove Tac Op</button>
-		</div>
-
-		<div class="scoreboard">
+	<div class="main-wrapper">
+		<div class="container" id="left-container">
+			<h1>Opponent</h1>
+			<div class="buttons" id="add-buttons">
+				<button onclick="addPoints('crit_opponent')">Add Crit Op</button>
+				<button onclick="addPoints('kill_opponent')">Add Kill Op</button>
+				<button onclick="addPoints('tac_opponent')">Add Tac Op</button>
+			</div>
+			
+			<div class="buttons" id ="remove-buttons">
+				<button onclick="removePoints('crit_opponent')">Remove Crit Op</button>
+				<button onclick="removePoints('kill_opponent')">Remove Kill Op</button>
+				<button onclick="removePoints('tac_opponent')">Remove Tac Op</button>
+			</div>
+			
+			<div class="scoreboard">
 			<div class="op-container">
 				<div class="op-box" id="crit-box-opponent">Crit Op: 0</div>
 				<div class="op-box" id="tac-box-opponent">Tac Op: 0</div>
@@ -69,7 +70,9 @@
 			
 			<div class="final-box" id="player-total">Total: 0</div>
 		</div>
-		<script src="script.js"></script>
-		
-	</body>
-	</html>
+	</div>
+	
+	<script src="script.js"></script>
+	
+</body>
+</html>

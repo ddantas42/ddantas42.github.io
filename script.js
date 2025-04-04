@@ -77,8 +77,8 @@ function player_total_update(elem, crit, kill, tac)
 
 	if (kill > points['kill_opponent'])
 		total += 1;
-	
-    document.getElementById(elem).innerText = `Max Total: ${total}`;
+
+    document.getElementById(elem).innerText = `Total: ${total}`;
 }
 
 function opponent_total_update(elem, crit, kill, tac)
@@ -89,5 +89,5 @@ function opponent_total_update(elem, crit, kill, tac)
 	let total = crit + kill + tac + highestPrimary;
 	if (kill > points['kill_player'])
 		total += 1;
-	document.getElementById(elem).innerText = `Max Total: ${total}`;
+	document.getElementById(elem).innerText = `Total: ${total}`;
 }

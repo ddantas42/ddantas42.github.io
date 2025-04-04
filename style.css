@@ -3,21 +3,23 @@ body {
 	text-align: center;
 	background-color: #282c34;
 	color: white;
+	margin: 0;
+	padding: 0;
 }
+
+.main-wrapper {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	padding: 20px;
+}
+
 .container {
-	max-width: 25%;
-	margin: 20px auto;
+	flex: 1;
+	max-width: 400px;
 	padding: 20px;
 	background-color: #3b3f47;
 	border-radius: 10px;
-}
-#left-container {
-	float: left;
-	width: 50%;
-}
-#right-container {
-	float: right;
-	width: 50%;
 }
 
 .buttons button {
@@ -30,10 +32,13 @@ body {
 	cursor: pointer;
 }
 
-#remove-buttons button { background-color: #1565c0; } /* Slightly darker blue for remove buttons */
+#remove-buttons button {
+	background-color: #1565c0;
+}
 
-button:hover { filter: brightness(1.2); }
-
+button:hover {
+	filter: brightness(1.2);
+}
 
 .op-box, .final-box {
 	margin: 10px;
@@ -42,6 +47,7 @@ button:hover { filter: brightness(1.2); }
 	background-color: #444;
 	border-radius: 5px;
 }
+
 .final-box {
 	font-size: 22px;
 	font-weight: bold;
@@ -50,4 +56,14 @@ button:hover { filter: brightness(1.2); }
 
 .scoreboard {
 	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.op-container, .primary-container {
+	width: 48%;
+}
+
+.your-score {
+	margin-bottom: 15px;
 }
