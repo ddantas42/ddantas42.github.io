@@ -1,69 +1,179 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
 body {
-	font-family: Arial, sans-serif;
-	text-align: center;
-	background-color: #282c34;
-	color: white;
-	margin: 0;
-	padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    line-height: 1.5;
+    padding: 20px;
 }
 
+/* Main wrapper for the game */
 .main-wrapper {
-	display: flex;
-	justify-content: center;
-	gap: 40px;
-	padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
 }
 
+/* Container styles */
 .container {
-	flex: 1;
-	max-width: 450px;
-	padding: 20px;
-	background-color: #3b3f47;
-	border-radius: 10px;
+    background-color: #333;
+    border-radius: 8px;
+    padding: 20px;
+    width: 45%;
+    text-align: center;
 }
 
-.buttons button {
-	margin: 5px;
-	padding: 10px;
-	font-size: 16px;
-	background-color: #61dafb;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
+/* Header styling */
+h1 {
+    color: #f1f1f1;
+    margin-bottom: 20px;
 }
 
-#remove-buttons button {
-	background-color: #1565c0;
+/* Button styling */
+button {
+    background-color: #0066cc;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-	filter: brightness(1.2);
+    background-color: #005bb5;
 }
 
-.op-box, .final-box {
-	margin: 10px;
-	padding: 10px;
-	font-size: 18px;
-	background-color: #444;
-	border-radius: 5px;
+button:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+/* Scoreboard boxes */
+.op-container, .primary-container {
+    margin-bottom: 20px;
+}
+
+.op-box {
+    background-color: #444;
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
 }
 
 .final-box {
-	font-size: 22px;
-	font-weight: bold;
-	background-color: darkblue;
+    background-color: #333;
+    padding: 15px;
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
-.scoreboard {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+/* Inputs and checkboxes */
+input[type="number"] {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 50%;
+    text-align: center;
+    border: 1px solid #444;
 }
 
-.op-container, .primary-container {
-	width: 48%;
+input[type="checkbox"] {
+    margin: 10px;
 }
 
+/* Hide pages when not in use */
+#middle-page, #end-page {
+    display: none;
+}
+
+/* Flexbox for score display sections */
 .your-score {
-	margin-bottom: 15px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.your-score label {
+    display: block;
+    font-size: 16px;
+    color: #ccc;
+}
+
+/* Feedback and breakdown section */
+#score-breakdown {
+    text-align: left;
+    font-size: 18px;
+}
+
+#final-feedback {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Ensure all pages are centered and have good spacing */
+#start-page, #middle-page, #end-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+input[type="number"], button {
+    font-size: 18px;
+}
+
+/* Background Image */
+body {
+    background-image: url('40.jpg'); /* Set this to your desired image path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.operative-selection {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.operative-box {
+    margin: 10px 0;
+}
+
+label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+select {
+    padding: 10px;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #444;
+    background-color: #333;
+    color: white;
+}
+
+select:focus {
+    outline: none;
+    border-color: #0066cc;
+    background-color: #444;
 }

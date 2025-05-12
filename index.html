@@ -1,78 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kill Team Point Counter</title>
-	<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kill Team Point Counter</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="main-wrapper">
-		<div class="container" id="left-container">
-			<h1>Opponent</h1>
-			<div class="buttons" id="add-buttons">
-				<button onclick="addPoints('crit_opponent')">Add Crit Op</button>
-				<button onclick="addPoints('kill_opponent')">Add Kill Op</button>
-				<button onclick="addPoints('tac_opponent')">Add Tac Op</button>
+
+    <div id="start-page">
+        <h1>Start of the Game</h1>
+		<div class="operative-selection">
+			<h2>Select Number of Operatives</h2>
+			<div class="operative-selection">
+				<h2>Select Number of Operatives</h2>
+				<div class="operative-box">
+					<label for="player-operatives">Player's Operatives:</label>
+					<select id="player-operatives" onchange="updateOperatives('player')">
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+					</select>
+				</div>
+				<div class="operative-box">
+					<label for="opponent-operatives">Opponent's Operatives:</label>
+					<select id="opponent-operatives" onchange="updateOperatives('opponent')">
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+					</select>
+				</div>
 			</div>
-			
-			<div class="buttons" id ="remove-buttons">
-				<button onclick="removePoints('crit_opponent')">Remove Crit Op</button>
-				<button onclick="removePoints('kill_opponent')">Remove Kill Op</button>
-				<button onclick="removePoints('tac_opponent')">Remove Tac Op</button>
-			</div>
-			
-			<div class="scoreboard">
-			<div class="op-container">
-				<div class="op-box" id="crit-box-opponent">Crit Op: 0</div>
-				<div class="op-box" id="tac-box-opponent">Tac Op: 0</div>
-				<div class="op-box" id="kill-box-opponent">Kill Op: 0</div>
-			</div>
-			<div class="primary-container">
-				<div class="op-box" id="crit-primary-box-opponent">Crit Op (Primary): 0</div>
-				<div class="op-box" id="tac-primary-box-opponent">Tac Op (Primary): 0</div>
-				<div class="op-box" id="kill-primary-box-opponent">Kill Op (Primary): 0</div>	
-			</div>
-			<div class="final-box" id="opponent-total">Total: 0</div>
 		</div>
-	</div>
-	
-	<div class="container" id="right-container">
-		<h1>Player</h1>
-		<div class="your-score">
-			<input type="checkbox" id="crit-primary-check" onclick="updateUI()"> Crit Primary
-			<input type="checkbox" id="kill-primary-check" onclick="updateUI()"> Kill Primary
-			<input type="checkbox" id="tac-primary-check" onclick="updateUI()"> Tac Primary
-		</div>
-		<div class="buttons" id="add-buttons">
-			<button onclick="addPoints('crit_player')">Add Crit Op</button>
-			<button onclick="addPoints('kill_player')">Add Kill Op</button>
-			<button onclick="addPoints('tac_player')">Add Tac Op</button>
-		</div>
-		
-		<div class="buttons" id ="remove-buttons">
-			<button onclick="removePoints('crit_player')">Remove Crit Op</button>
-			<button onclick="removePoints('kill_player')">Remove Kill Op</button>
-			<button onclick="removePoints('tac_player')">Remove Tac Op</button>
-		</div>
-		
-		<div class="scoreboard">
-			<div class="op-container">
-				<div class="op-box" id="crit-box-player">Crit Op: 0</div>
-				<div class="op-box" id="tac-box-player">Tac Op: 0</div>
-				<div class="op-box" id="kill-box-player">Kill Op: 0</div>
-			</div>
-			<div class="primary-container">
-				<div class="op-box" id="crit-primary-box-player">Crit Op (Primary): 0</div>
-				<div class="op-box" id="tac-primary-box-player">Tac Op (Primary): 0</div>
-				<div class="op-box" id="kill-primary-box-player">Kill Op (Primary): 0</div>	
-			</div>
-			
-			<div class="final-box" id="player-total">Total: 0</div>
-		</div>
-	</div>
-	
-	<script src="script.js"></script>
-	
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="middle-page" style="display: none;">
+        <h1>Middle of the Game</h1>
+        <!-- Buttons to add/remove points -->
+        <div class="buttons">
+            <button onclick="addPoints('crit_player')">Add Crit Op</button>
+            <button onclick="addPoints('kill_player')">Add Kill Op</button>
+            <button onclick="addPoints('tac_player')">Add Tac Op</button>
+        </div>
+        <div class="buttons">
+            <button onclick="removePoints('crit_player')">Remove Crit Op</button>
+            <button onclick="removePoints('kill_player')">Remove Kill Op</button>
+            <button onclick="removePoints('tac_player')">Remove Tac Op</button>
+        </div>
+
+        <!-- Input for Primary Operations -->
+        <div class="your-score">
+            <label><input type="checkbox" id="crit-primary-check" onclick="updateUI()"> Crit Primary</label>
+            <label><input type="checkbox" id="kill-primary-check" onclick="updateUI()"> Kill Primary</label>
+            <label><input type="checkbox" id="tac-primary-check" onclick="updateUI()"> Tac Primary</label>
+        </div>
+
+        <button onclick="endGame()">End Game</button>
+    </div>
+
+    <div id="end-page" style="display: none;">
+        <h1>End of the Game</h1>
+        <p id="final-feedback">Here is your final feedback based on the operations and points!</p>
+        <div id="score-breakdown">
+            <!-- Breakdown of the points (to be filled by script) -->
+        </div>
+        <button onclick="restartGame()">Restart Game</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
