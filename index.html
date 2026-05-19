@@ -7,36 +7,354 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div id="start-page">
-		<h1>Start of the Game</h1>
-		<div class="operative-selection">
-			<h2>Select Number of Operatives</h2>
-				<div class="operative-box">
-					<label for="player-operatives">Player's Operatives:</label>
-					<select id="player-operatives" onchange="updateOperatives('player')"> <option value="5">5</option> <option value="6" selected>6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option>
-					</select>
-				</div>
-				<div class="operative-box">
-					<label for="opponent-operatives">Opponent's Operatives:</label>
-					<select id="opponent-operatives" onchange="updateOperatives('opponent')"> <option value="5">5</option> <option value="6" selected>6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option> <option value="13">13</option> <option value="14">14</option>
-					</select>
+	<div id="start-page" class="page start-page-container">
+		<div class="start-content">
+			<div class="title-banner">
+				<h1>⚔️ KILL TEAM ⚔️</h1>
+				<p class="subtitle">Mission Tracker</p>
+			</div>
+			
+			<div class="operative-selection">
+				<h2>Prepare Your Kill Teams</h2>
+				<div class="operative-grid">
+					<div class="operative-box">
+						<label for="player-operatives">Your Operatives:</label>
+						<select id="player-operatives" onchange="updateOperatives('player')">
+							<option value="5">5</option>
+							<option value="6" selected>6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+						</select>
+					</div>
+					<div class="operative-box">
+						<label for="opponent-operatives">Enemy Operatives:</label>
+						<select id="opponent-operatives" onchange="updateOperatives('opponent')">
+							<option value="5">5</option>
+							<option value="6" selected>6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+						</select>
+					</div>
 				</div>
 			</div>
-			<button onclick="startGame()">Start Game</button>
+			<button onclick="startGame()" class="start-button">BEGIN CAMPAIGN</button>
 		</div>
 	</div>
 
-	<div id="middle-page" style="display: none;">
-		<h1>Middle of the Game</h1>
-	   
-		<button onclick="endGame()">End Game</button>
+	<div id="middle-page" class="page" style="display: none;">
+		<div class="game-header">
+			<h1>ACTIVE ENGAGEMENT</h1>
+			<p class="engagement-info">Score the Objectives - Defeat Your Enemies</p>
+		</div>
+
+		<div class="main-wrapper">
+			<div class="team-container player-team">
+				<div class="team-header">
+					<h2>Your Kill Team</h2>
+					<div class="operative-badge"><span id="player-op-count">0</span> Operatives</div>
+				</div>
+				
+				<div class="operations-grid">
+					<div class="op-card crit-card">
+						<div class="op-label">Crit Op</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustPoints('player', 'critOp', -1)">−</button>
+							<div class="op-value" id="player-critOp">0</div>
+							<button class="op-btn plus" onclick="adjustPoints('player', 'critOp', 1)">+</button>
+						</div>
+						<div class="op-constraint">(0-6)</div>
+					</div>
+
+					<div class="op-card tac-card">
+						<div class="op-label">Tac Op</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustPoints('player', 'tacOp', -1)">−</button>
+							<div class="op-value" id="player-tacOp">0</div>
+							<button class="op-btn plus" onclick="adjustPoints('player', 'tacOp', 1)">+</button>
+						</div>
+						<div class="op-constraint">(0-6)</div>
+					</div>
+
+					<div class="op-card kill-card">
+						<div class="op-label">Enemies Killed</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustEnemiesKilled('player', -1)">−</button>
+							<div class="op-value" id="player-enemies-killed">0</div>
+							<button class="op-btn plus" onclick="adjustEnemiesKilled('player', 1)">+</button>
+						</div>
+						<div class="kill-grade" id="player-kill-grade">Grade: 0</div>
+						<div class="op-constraint">Kill Op: <span id="player-kill-op-display">0</span></div>
+					</div>
+				</div>
+
+				<div class="primary-selector">
+					<label for="player-primary-select">Select Primary Op:</label>
+					<select id="player-primary-select" onchange="updatePrimaryOp('player')">
+						<option value="crit">Crit Op</option>
+						<option value="tac">Tac Op</option>
+						<option value="kill">Kill Op</option>
+					</select>
+				</div>
+
+				<div class="primary-display">
+					<div class="primary-label">Primary Op Points</div>
+					<div class="primary-value" id="player-primaryOp">0</div>
+				</div>
+
+				<div class="score-box">
+					<div class="score-label">Total Mission Points</div>
+					<div class="score-value" id="player-total">0</div>
+				</div>
+			</div>
+
+			<div class="vs-divider">VS</div>
+
+			<div class="team-container opponent-team">
+				<div class="team-header">
+					<h2>Enemy Kill Team</h2>
+					<div class="operative-badge"><span id="opponent-op-count">0</span> Operatives</div>
+				</div>
+				
+				<div class="operations-grid">
+					<div class="op-card crit-card">
+						<div class="op-label">Crit Op</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustPoints('opponent', 'critOp', -1)">−</button>
+							<div class="op-value" id="opponent-critOp">0</div>
+							<button class="op-btn plus" onclick="adjustPoints('opponent', 'critOp', 1)">+</button>
+						</div>
+						<div class="op-constraint">(0-6)</div>
+					</div>
+
+					<div class="op-card tac-card">
+						<div class="op-label">Tac Op</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustPoints('opponent', 'tacOp', -1)">−</button>
+							<div class="op-value" id="opponent-tacOp">0</div>
+							<button class="op-btn plus" onclick="adjustPoints('opponent', 'tacOp', 1)">+</button>
+						</div>
+						<div class="op-constraint">(0-6)</div>
+					</div>
+
+					<div class="op-card kill-card">
+						<div class="op-label">Enemies Killed</div>
+						<div class="op-display">
+							<button class="op-btn minus" onclick="adjustEnemiesKilled('opponent', -1)">−</button>
+							<div class="op-value" id="opponent-enemies-killed">0</div>
+							<button class="op-btn plus" onclick="adjustEnemiesKilled('opponent', 1)">+</button>
+						</div>
+						<div class="kill-grade" id="opponent-kill-grade">Grade: 0</div>
+						<div class="op-constraint">Kill Op: <span id="opponent-kill-op-display">0</span></div>
+					</div>
+				</div>
+
+				<div class="primary-selector">
+					<label for="opponent-primary-select">Select Primary Op:</label>
+					<select id="opponent-primary-select" onchange="updatePrimaryOp('opponent')">
+						<option value="crit">Crit Op</option>
+						<option value="tac">Tac Op</option>
+						<option value="kill">Kill Op</option>
+					</select>
+				</div>
+
+				<div class="primary-display">
+					<div class="primary-label">Primary Op Points</div>
+					<div class="primary-value" id="opponent-primaryOp">0</div>
+				</div>
+
+				<div class="score-box">
+					<div class="score-label">Total Mission Points</div>
+					<div class="score-value" id="opponent-total">0</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="button-group">
+			<button onclick="endGame()" class="finish-btn">🏁 DECLARE VICTOR 🏁</button>
+			<button onclick="toggleHelpInfo()" class="help-btn">❓ How Kill Op Works ❓</button>
+		</div>
+
+		<div id="help-info" class="help-panel" style="display: none;">
+			<div class="help-content">
+				<h3>Kill Grade System</h3>
+				<p>Your Kill Grade increases as you incapacitate enemy operatives. The number of enemies required for each grade depends on their starting team size:</p>
+				<table class="kill-grade-table">
+					<tr>
+						<th>Starting Operatives</th>
+						<th>Grade 1</th>
+						<th>Grade 2</th>
+						<th>Grade 3</th>
+						<th>Grade 4</th>
+						<th>Grade 5</th>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>1</td>
+						<td>2</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td>1</td>
+						<td>3</td>
+						<td>4</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td>2</td>
+						<td>3</td>
+						<td>5</td>
+						<td>6</td>
+						<td>8</td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td>2</td>
+						<td>4</td>
+						<td>5</td>
+						<td>7</td>
+						<td>9</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>2</td>
+						<td>4</td>
+						<td>6</td>
+						<td>8</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td>11</td>
+						<td>2</td>
+						<td>4</td>
+						<td>7</td>
+						<td>9</td>
+						<td>11</td>
+					</tr>
+					<tr>
+						<td>12</td>
+						<td>2</td>
+						<td>5</td>
+						<td>7</td>
+						<td>10</td>
+						<td>12</td>
+					</tr>
+					<tr>
+						<td>13</td>
+						<td>3</td>
+						<td>5</td>
+						<td>8</td>
+						<td>10</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td>14</td>
+						<td>3</td>
+						<td>6</td>
+						<td>8</td>
+						<td>11</td>
+						<td>14</td>
+					</tr>
+				</table>
+				<p><strong>Example:</strong> If the enemy team has 6 operatives and you've killed 4, you reach <strong>Grade 3</strong>, earning <strong>3 Kill Op Points</strong>.</p>
+			</div>
+		</div>
 	</div>
 
-	<div id="end-page" style="display: none;">
-		<h1>End of the Game</h1>
+	<div id="end-page" class="page" style="display: none;">
+		<div class="results-header">
+			<h1>MISSION COMPLETE</h1>
+		</div>
 
+		<div id="winner-announcement" class="winner-box"></div>
+		
+		<div class="main-wrapper">
+			<div class="results-container player-team">
+				<h2>Your Kill Team</h2>
+				
+				<div class="result-stat crit">
+					<span class="stat-name">Crit Op</span>
+					<span class="stat-value" id="final-player-critOp">0</span>
+				</div>
 
-		<button onclick="resetGame()">Reset Game</button>
+				<div class="result-stat tac">
+					<span class="stat-name">Tac Op</span>
+					<span class="stat-value" id="final-player-tacOp">0</span>
+				</div>
+
+				<div class="result-stat kill">
+					<span class="stat-name">Kill Op</span>
+					<span class="stat-value" id="final-player-killOp">0</span>
+				</div>
+
+				<div class="result-stat primary">
+					<span class="stat-name">Primary Op</span>
+					<span class="stat-value" id="final-player-primaryOp">0</span>
+				</div>
+
+				<div class="result-total">
+					<span class="total-label">Total Points</span>
+					<span class="total-value" id="final-player-total">0</span>
+				</div>
+			</div>
+
+			<div class="results-container opponent-team">
+				<h2>Enemy Kill Team</h2>
+				
+				<div class="result-stat crit">
+					<span class="stat-name">Crit Op</span>
+					<span class="stat-value" id="final-opponent-critOp">0</span>
+				</div>
+
+				<div class="result-stat tac">
+					<span class="stat-name">Tac Op</span>
+					<span class="stat-value" id="final-opponent-tacOp">0</span>
+				</div>
+
+				<div class="result-stat kill">
+					<span class="stat-name">Kill Op</span>
+					<span class="stat-value" id="final-opponent-killOp">0</span>
+				</div>
+
+				<div class="result-stat primary">
+					<span class="stat-name">Primary Op</span>
+					<span class="stat-value" id="final-opponent-primaryOp">0</span>
+				</div>
+
+				<div class="result-total">
+					<span class="total-label">Total Points</span>
+					<span class="total-value" id="final-opponent-total">0</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="button-group">
+			<button onclick="resetGame()" class="restart-btn">⚔️ NEW CAMPAIGN ⚔️</button>
+		</div>
 	</div>
 
 	<script src="script.js"></script>
